@@ -28,7 +28,6 @@
       text-align: center;
       border-bottom: 1px solid #e9ecef;
     }
-
     .hero h1 {
       font-family: 'Georgia', serif;
       font-size: 2.4rem;
@@ -37,7 +36,6 @@
       line-height: 1.2;
       margin-bottom: 0.8rem;
     }
-
     .hero p {
       font-size: 1.1rem;
       color: #3d4a5a;
@@ -51,7 +49,6 @@
       max-width: 520px;
       text-align: center;
     }
-
     .selector-wrap label {
       display: block;
       font-size: 0.8rem;
@@ -61,7 +58,6 @@
       color: #7a86a0;
       margin-bottom: 0.6rem;
     }
-
     select {
       width: 100%;
       padding: 0.95rem 1.2rem;
@@ -80,9 +76,7 @@
       box-shadow: 0 4px 14px -6px rgba(26, 59, 122, 0.2);
       transition: border-color 0.2s;
     }
-
-    select:hover { border-color: #1a3b7a; }
-    select:focus { outline: none; border-color: #1a3b7a; }
+    select:hover, select:focus { border-color: #1a3b7a; outline: none; }
 
     /* FACEBOOK AD FRAME */
     .fb-frame {
@@ -95,14 +89,12 @@
       overflow: hidden;
     }
 
-    /* Ad header */
     .fb-header {
       display: flex;
       align-items: center;
       gap: 0.7rem;
       padding: 0.9rem 1rem;
     }
-
     .fb-avatar {
       width: 2.5rem;
       height: 2.5rem;
@@ -110,14 +102,12 @@
       background: linear-gradient(135deg, #3b6bcf, #1a3b7a);
       flex: 0 0 auto;
     }
-
     .fb-user {
       font-size: 0.9rem;
       font-weight: 700;
       color: #0b1424;
       line-height: 1.2;
     }
-
     .fb-meta {
       font-size: 0.72rem;
       color: #7a86a0;
@@ -126,7 +116,6 @@
       gap: 0.3rem;
     }
 
-    /* Ad caption above carousel */
     .fb-caption {
       padding: 0 1rem 0.8rem 1rem;
       font-size: 0.85rem;
@@ -140,7 +129,6 @@
       border-top: 1px solid #f0f0f0;
       border-bottom: 1px solid #f0f0f0;
     }
-
     .carousel {
       display: flex;
       gap: 0.6rem;
@@ -150,7 +138,6 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
-
     .carousel::-webkit-scrollbar { display: none; }
 
     .card {
@@ -164,7 +151,6 @@
       display: flex;
       flex-direction: column;
     }
-
     .card-img {
       width: 100%;
       height: 200px;
@@ -174,36 +160,32 @@
       justify-content: center;
       overflow: hidden;
     }
-
     .card-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-
     .card-body {
       padding: 0.7rem 0.8rem;
       display: flex;
       flex-direction: column;
       gap: 0.3rem;
+      flex: 1;
     }
-
     .card-headline {
       font-size: 0.82rem;
       font-weight: 700;
       color: #0b1424;
       line-height: 1.3;
     }
-
     .card-desc {
       font-size: 0.72rem;
       color: #7a86a0;
       line-height: 1.35;
     }
-
     .card-cta {
-      margin-top: 0.4rem;
+      margin-top: auto;
       align-self: flex-start;
       font-size: 0.72rem;
       font-weight: 700;
@@ -214,9 +196,11 @@
       border-radius: 6px;
       text-decoration: none;
       cursor: pointer;
+      transition: background 0.15s;
     }
+    .card-cta:hover { background: #d8e3f5; }
 
-    /* Nav dots / arrows */
+    /* Carousel nav */
     .carousel-nav {
       display: flex;
       align-items: center;
@@ -224,12 +208,7 @@
       padding: 0.6rem 1rem;
       border-top: 1px solid #f0f0f0;
     }
-
-    .carousel-dots {
-      display: flex;
-      gap: 0.3rem;
-    }
-
+    .carousel-dots { display: flex; gap: 0.3rem; }
     .dot {
       width: 6px;
       height: 6px;
@@ -237,11 +216,9 @@
       background: #d8e3f5;
       transition: background 0.2s;
     }
-
     .dot.active { background: #1a3b7a; }
 
     .nav-arrows { display: flex; gap: 0.4rem; }
-
     .nav-arrow {
       width: 1.8rem;
       height: 1.8rem;
@@ -257,11 +234,9 @@
       justify-content: center;
       transition: background 0.15s;
     }
-
     .nav-arrow:hover { background: #eef3fc; }
     .nav-arrow:disabled { opacity: 0.35; cursor: default; }
 
-    /* Ad footer */
     .fb-footer {
       display: flex;
       align-items: center;
@@ -272,11 +247,11 @@
       font-weight: 600;
       color: #55617d;
     }
-
     .fb-footer span {
       display: flex;
       align-items: center;
       gap: 0.3rem;
+      cursor: pointer;
     }
 
     /* Empty state */
@@ -302,7 +277,6 @@
       margin: 3rem auto 0 auto;
       max-width: 900px;
     }
-
     .cta-section h2 {
       font-family: 'Georgia', serif;
       font-size: 1.8rem;
@@ -310,13 +284,11 @@
       color: #0b1424;
       margin-bottom: 0.5rem;
     }
-
     .cta-section p {
       font-size: 1rem;
       color: #3d4a5a;
       margin-bottom: 1.5rem;
     }
-
     .btn-primary {
       display: inline-block;
       background: #1a3b7a;
@@ -330,7 +302,6 @@
       transition: all 0.2s ease;
       box-shadow: 0 6px 18px -8px rgba(26, 59, 122, 0.4);
     }
-
     .btn-primary:hover {
       background: #0b1f4a;
       border-color: #0b1f4a;
@@ -353,39 +324,32 @@
 </head>
 <body>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="container">
       <h1>See Your Ad Live</h1>
-      <p>Pick a paid ad idea. See exactly how it appears on Facebook and Instagram carousel — before you post.</p>
+      <p>Pick a Meta ad objective. See exactly how it appears on Facebook and Instagram carousel — before you post.</p>
     </div>
   </section>
 
   <div class="container">
-
-    <!-- SELECTOR -->
     <div class="selector-wrap">
-      <label for="ideaSelect">Choose a paid ad idea</label>
+      <label for="ideaSelect">Choose an ad objective</label>
       <select id="ideaSelect">
-        <option value="">— Select an idea —</option>
-        <option value="flash-sale">Flash Sale</option>
-        <option value="new-menu">New Menu Launch</option>
-        <option value="weekend-special">Weekend Special</option>
-        <option value="event-promo">Event Promo</option>
-        <option value="first-visit">First-Time Visitor Offer</option>
+        <option value="">— Select an ad objective —</option>
+        <option value="awareness">Awareness</option>
+        <option value="traffic">Traffic</option>
+        <option value="engagement">Engagement</option>
+        <option value="leads">Leads</option>
+        <option value="app-promotion">App Promotion</option>
+        <option value="sales">Sales</option>
       </select>
     </div>
 
-    <!-- PREVIEW -->
     <div id="previewContent">
-      <div class="empty-state">
-        ↑ Select a paid ad idea to see it live
-      </div>
+      <div class="empty-state">↑ Select an ad objective to see it live</div>
     </div>
-
   </div>
 
-  <!-- CTA -->
   <div class="container">
     <div class="cta-section">
       <h2>Get the Templates</h2>
@@ -400,59 +364,63 @@
 
   <script>
     // ============================================================
-    //  CAROUSEL DATA
-    //  Add up to 10 cards per idea.
-    //  ANY card without an "image" will be SKIPPED automatically.
-    //  Just leave "image: """ empty and it won't appear.
+    //  CAROUSEL DATA — keys match Meta's official ad objectives
+    //  Cards with no image are skipped automatically.
     // ============================================================
 
     const ads = {
-      "flash-sale": {
+      "awareness": {
+        caption: "Fresh ingredients, made with love every single day. Come see what we're about. 🍝",
+        cards: [
+          { image: "img/awareness-1.jpg", headline: "Made With Love", desc: "Fresh, every day", cta: "Follow Us" },
+          { image: "img/awareness-2.jpg", headline: "Our Kitchen", desc: "Where it all happens", cta: "See More" },
+          { image: "img/awareness-3.jpg", headline: "Our Story", desc: "Why we cook", cta: "Learn More" }
+        ]
+      },
+      "traffic": {
+        caption: "Our full menu is live on our website — tap to see everything we serve.",
+        cards: [
+          { image: "img/traffic-1.jpg", headline: "See Full Menu", desc: "Every dish, every price", cta: "View Menu" },
+          { image: "img/traffic-2.jpg", headline: "Order Online", desc: "Delivery or pickup", cta: "Order Now" },
+          { image: "img/traffic-3.jpg", headline: "Find Us", desc: "Location + hours", cta: "Get Directions" }
+        ]
+      },
+      "engagement": {
+        caption: "Which one are you ordering first? Tell us below. 👇",
+        cards: [
+          { image: "img/engagement-1.jpg", headline: "Which Dish Wins?", desc: "Comment your favorite", cta: "Vote Now" },
+          { image: "img/engagement-2.jpg", headline: "Guess The Ingredient", desc: "Winner gets a free dessert", cta: "Take A Guess" },
+          { image: "img/engagement-3.jpg", headline: "Tag A Friend", desc: "Who would love this?", cta: "Tag Them" }
+        ]
+      },
+      "leads": {
+        caption: "Want our full menu? We'll send it straight to your WhatsApp. 📩",
+        cards: [
+          { image: "img/leads-1.jpg", headline: "Get Our Menu", desc: "Sent instantly", cta: "Send Me The Menu" },
+          { image: "img/leads-2.jpg", headline: "Join The List", desc: "Offers before anyone else", cta: "Sign Up" },
+          { image: "img/leads-3.jpg", headline: "Book A Table", desc: "We'll confirm by message", cta: "Reserve Now" }
+        ]
+      },
+      "app-promotion": {
+        caption: "Order faster with our app — download now and get your first dessert free.",
+        cards: [
+          { image: "img/app-1.jpg", headline: "Download Our App", desc: "Order in seconds", cta: "Install Now" },
+          { image: "img/app-2.jpg", headline: "Free Dessert", desc: "First app order", cta: "Get The App" },
+          { image: "img/app-3.jpg", headline: "Skip The Wait", desc: "Order ahead", cta: "Download" }
+        ]
+      },
+      "sales": {
         caption: "This weekend only — 20% off our signature dishes. Book your table now.",
         cards: [
-          { image: "img/flash-1.jpg", headline: "20% OFF", desc: "All signature dishes", cta: "Book Now" },
-          { image: "img/flash-2.jpg", headline: "Today Only", desc: "Limited tables available", cta: "Reserve" },
-          { image: "img/flash-3.jpg", headline: "Family Deal", desc: "2-for-1 on mains", cta: "See Menu" },
-          { image: "", headline: "Extra Card", desc: "No image — hidden", cta: "Hidden" },
-          { image: "", headline: "Extra Card", desc: "No image — hidden", cta: "Hidden" }
-        ]
-      },
-      "new-menu": {
-        caption: "Something new just landed on our menu. Come taste it first.",
-        cards: [
-          { image: "img/menu-1.jpg", headline: "New Dish", desc: "Thai Basil Chicken", cta: "Order Now" },
-          { image: "img/menu-2.jpg", headline: "Chef's New Pick", desc: "Fresh seasonal plate", cta: "See Menu" },
-          { image: "img/menu-3.jpg", headline: "Try It First", desc: "Available this week", cta: "Book Table" }
-        ]
-      },
-      "weekend-special": {
-        caption: "Weekend Special — 2-course meal for two. Limited seats.",
-        cards: [
-          { image: "img/weekend-1.jpg", headline: "2-Course Meal", desc: "For two people", cta: "Book Now" },
-          { image: "img/weekend-2.jpg", headline: "Free Dessert", desc: "With every booking", cta: "Reserve" },
-          { image: "img/weekend-3.jpg", headline: "Live Music", desc: "Friday & Saturday", cta: "See Details" }
-        ]
-      },
-      "event-promo": {
-        caption: "Live music this Friday at 8 PM. Reserve your spot before it's full.",
-        cards: [
-          { image: "img/event-1.jpg", headline: "Live Music", desc: "This Friday, 8 PM", cta: "Reserve" },
-          { image: "img/event-2.jpg", headline: "Special Menu", desc: "Chef's event plate", cta: "See Menu" },
-          { image: "img/event-3.jpg", headline: "Limited Seats", desc: "Book early", cta: "Book Now" }
-        ]
-      },
-      "first-visit": {
-        caption: "First time visiting? Enjoy 10% off your first meal with us.",
-        cards: [
-          { image: "img/first-1.jpg", headline: "10% OFF", desc: "First visit only", cta: "Claim Offer" },
-          { image: "img/first-2.jpg", headline: "Welcome Deal", desc: "Any dish, any time", cta: "Get Code" },
-          { image: "img/first-3.jpg", headline: "Try Us", desc: "We think you'll stay", cta: "Book Now" }
+          { image: "img/sales-1.jpg", headline: "20% OFF", desc: "All signature dishes", cta: "Order Now" },
+          { image: "img/sales-2.jpg", headline: "Today Only", desc: "Limited tables available", cta: "Book Now" },
+          { image: "img/sales-3.jpg", headline: "Family Deal", desc: "2-for-1 on mains", cta: "Get Deal" }
         ]
       }
     };
 
     // ============================================================
-    //  RENDER LOGIC — no need to edit below
+    //  RENDER LOGIC
     // ============================================================
 
     const select = document.getElementById('ideaSelect');
@@ -460,9 +428,7 @@
 
     function renderEmpty() {
       previewContent.innerHTML = `
-        <div class="empty-state">
-          ↑ Select a paid ad idea to see it live
-        </div>
+        <div class="empty-state">↑ Select an ad objective to see it live</div>
       `;
     }
 
@@ -470,15 +436,9 @@
       const ad = ads[key];
       if (!ad) { renderEmpty(); return; }
 
-      // Only keep cards that actually have an image
       const visibleCards = ad.cards.filter(c => c.image && c.image.trim() !== "");
-
       if (visibleCards.length === 0) {
-        previewContent.innerHTML = `
-          <div class="empty-state">
-            No images added for this idea yet.
-          </div>
-        `;
+        previewContent.innerHTML = `<div class="empty-state">No images added for this objective yet.</div>`;
         return;
       }
 
@@ -528,26 +488,27 @@
         </div>
       `;
 
-      // Wire up navigation
       const carousel = document.getElementById('carousel');
       const dots = document.querySelectorAll('#dots .dot');
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
 
+      function cardWidth() {
+        return carousel.querySelector('.card').offsetWidth + 10;
+      }
       function updateDots() {
-        const cardWidth = carousel.querySelector('.card').offsetWidth + 10;
-        const idx = Math.round(carousel.scrollLeft / cardWidth);
+        const idx = Math.round(carousel.scrollLeft / cardWidth());
         dots.forEach((d, i) => d.classList.toggle('active', i === idx));
       }
-
-      function scrollAmount() {
-        const cardWidth = carousel.querySelector('.card').offsetWidth + 10;
-        return cardWidth;
+      function updateArrows() {
+        prevBtn.disabled = carousel.scrollLeft <= 2;
+        nextBtn.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 2;
       }
 
-      prevBtn.addEventListener('click', () => carousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
-      nextBtn.addEventListener('click', () => carousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
-      carousel.addEventListener('scroll', updateDots);
+      prevBtn.addEventListener('click', () => carousel.scrollBy({ left: -cardWidth(), behavior: 'smooth' }));
+      nextBtn.addEventListener('click', () => carousel.scrollBy({ left: cardWidth(), behavior: 'smooth' }));
+      carousel.addEventListener('scroll', () => { updateDots(); updateArrows(); });
+      updateArrows();
     }
 
     select.addEventListener('change', function() {
