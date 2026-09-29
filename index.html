@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>See Your Ad Live · Carousel Preview · The Artistic Unity</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #f8f9fa;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      color: #1e1e2f;
+      line-height: 1.6;
+      padding-bottom: 4rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* HERO */
+    .hero {
+      background: #ffffff;
+      padding: 3.5rem 2rem 2.5rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .hero h1 {
+      font-family: 'Georgia', serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: #0b1424;
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #3d4a5a;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* SELECTOR */
+    .selector-wrap {
+      margin: 2.5rem auto 2rem auto;
+      max-width: 520px;
+      text-align: center;
+    }
+
+    .selector-wrap label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #7a86a0;
+      margin-bottom: 0.6rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.95rem 1.2rem;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: 500;
+      color: #0b1b3a;
+      background: #ffffff;
+      border: 1.5px solid #d8e3f5;
+      border-radius: 60px;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231a3b7a' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.3rem center;
+      box-shadow: 0 4px 14px -6px rgba(26, 59, 122, 0.2);
+      transition: border-color 0.2s;
+    }
+
+    select:hover { border-color: #1a3b7a; }
+    select:focus { outline: none; border-color: #1a3b7a; }
+
+    /* FACEBOOK AD FRAME */
+    .fb-frame {
+      background: #ffffff;
+      border: 1px solid #e4ebf5;
+      border-radius: 1rem;
+      max-width: 620px;
+      margin: 0 auto;
+      box-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    /* Ad header */
+    .fb-header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.9rem 1rem;
+    }
+
+    .fb-avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b6bcf, #1a3b7a);
+      flex: 0 0 auto;
+    }
+
+    .fb-user {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0b1424;
+      line-height: 1.2;
+    }
+
+    .fb-meta {
+      font-size: 0.72rem;
+      color: #7a86a0;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* Ad caption above carousel */
+    .fb-caption {
+      padding: 0 1rem 0.8rem 1rem;
+      font-size: 0.85rem;
+      color: #2b3550;
+      line-height: 1.5;
+    }
+
+    /* CAROUSEL AREA */
+    .carousel-wrap {
+      position: relative;
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .carousel {
+      display: flex;
+      gap: 0.6rem;
+      overflow-x: auto;
+      padding: 0.8rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .carousel::-webkit-scrollbar { display: none; }
+
+    .card {
+      flex: 0 0 auto;
+      width: 200px;
+      background: #ffffff;
+      border: 1px solid #e4ebf5;
+      border-radius: 0.6rem;
+      overflow: hidden;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      background: #eef3fc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-body {
+      padding: 0.7rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .card-headline {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #0b1424;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.72rem;
+      color: #7a86a0;
+      line-height: 1.35;
+    }
+
+    .card-cta {
+      margin-top: 0.4rem;
+      align-self: flex-start;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #1a3b7a;
+      background: #eef3fc;
+      border: 1px solid #d8e3f5;
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Nav dots / arrows */
+    .carousel-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1rem;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #d8e3f5;
+      transition: background 0.2s;
+    }
+
+    .dot.active { background: #1a3b7a; }
+
+    .nav-arrows { display: flex; gap: 0.4rem; }
+
+    .nav-arrow {
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #d8e3f5;
+      color: #1a3b7a;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+
+    .nav-arrow:hover { background: #eef3fc; }
+    .nav-arrow:disabled { opacity: 0.35; cursor: default; }
+
+    /* Ad footer */
+    .fb-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0.7rem 1rem;
+      border-top: 1px solid #f0f0f0;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #55617d;
+    }
+
+    .fb-footer span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #9aa5bc;
+      font-size: 0.95rem;
+      background: #ffffff;
+      border: 1px solid #e4ebf5;
+      border-radius: 1.5rem;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: #ffffff;
+      border-radius: 2rem;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border: 1px solid #e4ebf5;
+      margin: 3rem auto 0 auto;
+      max-width: 900px;
+    }
+
+    .cta-section h2 {
+      font-family: 'Georgia', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: #0b1424;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-section p {
+      font-size: 1rem;
+      color: #3d4a5a;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: #1a3b7a;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.95rem 2.6rem;
+      border-radius: 60px;
+      border: 1px solid #1a3b7a;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 18px -8px rgba(26, 59, 122, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: #0b1f4a;
+      border-color: #0b1f4a;
+      transform: translateY(-2px);
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #7a86a0;
+      padding: 2rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .card { width: 170px; }
+      .card-img { height: 170px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>See Your Ad Live</h1>
+      <p>Pick a paid ad idea. See exactly how it appears on Facebook and Instagram carousel — before you post.</p>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- SELECTOR -->
+    <div class="selector-wrap">
+      <label for="ideaSelect">Choose a paid ad idea</label>
+      <select id="ideaSelect">
+        <option value="">— Select an idea —</option>
+        <option value="flash-sale">Flash Sale</option>
+        <option value="new-menu">New Menu Launch</option>
+        <option value="weekend-special">Weekend Special</option>
+        <option value="event-promo">Event Promo</option>
+        <option value="first-visit">First-Time Visitor Offer</option>
+      </select>
+    </div>
+
+    <!-- PREVIEW -->
+    <div id="previewContent">
+      <div class="empty-state">
+        ↑ Select a paid ad idea to see it live
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="container">
+    <div class="cta-section">
+      <h2>Get the Templates</h2>
+      <p>29 ready-to-use Canva templates. $49 one-time. Instant download.</p>
+      <a href="https://copecart.com/us/products/b2eab0b2/checkout" class="btn-primary" target="_blank" rel="noopener">Get Instant Access →</a>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    © 2026 The Artistic Unity — Restaurant Templates · All rights reserved.
+  </div>
+
+  <script>
+    // ============================================================
+    //  CAROUSEL DATA
+    //  Add up to 10 cards per idea.
+    //  ANY card without an "image" will be SKIPPED automatically.
+    //  Just leave "image: """ empty and it won't appear.
+    // ============================================================
+
+    const ads = {
+      "flash-sale": {
+        caption: "This weekend only — 20% off our signature dishes. Book your table now.",
+        cards: [
+          { image: "img/flash-1.jpg", headline: "20% OFF", desc: "All signature dishes", cta: "Book Now" },
+          { image: "img/flash-2.jpg", headline: "Today Only", desc: "Limited tables available", cta: "Reserve" },
+          { image: "img/flash-3.jpg", headline: "Family Deal", desc: "2-for-1 on mains", cta: "See Menu" },
+          { image: "", headline: "Extra Card", desc: "No image — hidden", cta: "Hidden" },
+          { image: "", headline: "Extra Card", desc: "No image — hidden", cta: "Hidden" }
+        ]
+      },
+      "new-menu": {
+        caption: "Something new just landed on our menu. Come taste it first.",
+        cards: [
+          { image: "img/menu-1.jpg", headline: "New Dish", desc: "Thai Basil Chicken", cta: "Order Now" },
+          { image: "img/menu-2.jpg", headline: "Chef's New Pick", desc: "Fresh seasonal plate", cta: "See Menu" },
+          { image: "img/menu-3.jpg", headline: "Try It First", desc: "Available this week", cta: "Book Table" }
+        ]
+      },
+      "weekend-special": {
+        caption: "Weekend Special — 2-course meal for two. Limited seats.",
+        cards: [
+          { image: "img/weekend-1.jpg", headline: "2-Course Meal", desc: "For two people", cta: "Book Now" },
+          { image: "img/weekend-2.jpg", headline: "Free Dessert", desc: "With every booking", cta: "Reserve" },
+          { image: "img/weekend-3.jpg", headline: "Live Music", desc: "Friday & Saturday", cta: "See Details" }
+        ]
+      },
+      "event-promo": {
+        caption: "Live music this Friday at 8 PM. Reserve your spot before it's full.",
+        cards: [
+          { image: "img/event-1.jpg", headline: "Live Music", desc: "This Friday, 8 PM", cta: "Reserve" },
+          { image: "img/event-2.jpg", headline: "Special Menu", desc: "Chef's event plate", cta: "See Menu" },
+          { image: "img/event-3.jpg", headline: "Limited Seats", desc: "Book early", cta: "Book Now" }
+        ]
+      },
+      "first-visit": {
+        caption: "First time visiting? Enjoy 10% off your first meal with us.",
+        cards: [
+          { image: "img/first-1.jpg", headline: "10% OFF", desc: "First visit only", cta: "Claim Offer" },
+          { image: "img/first-2.jpg", headline: "Welcome Deal", desc: "Any dish, any time", cta: "Get Code" },
+          { image: "img/first-3.jpg", headline: "Try Us", desc: "We think you'll stay", cta: "Book Now" }
+        ]
+      }
+    };
+
+    // ============================================================
+    //  RENDER LOGIC — no need to edit below
+    // ============================================================
+
+    const select = document.getElementById('ideaSelect');
+    const previewContent = document.getElementById('previewContent');
+
+    function renderEmpty() {
+      previewContent.innerHTML = `
+        <div class="empty-state">
+          ↑ Select a paid ad idea to see it live
+        </div>
+      `;
+    }
+
+    function renderAd(key) {
+      const ad = ads[key];
+      if (!ad) { renderEmpty(); return; }
+
+      // Only keep cards that actually have an image
+      const visibleCards = ad.cards.filter(c => c.image && c.image.trim() !== "");
+
+      if (visibleCards.length === 0) {
+        previewContent.innerHTML = `
+          <div class="empty-state">
+            No images added for this idea yet.
+          </div>
+        `;
+        return;
+      }
+
+      const cardsHTML = visibleCards.map(card => `
+        <div class="card">
+          <div class="card-img">
+            <img src="${card.image}" alt="${card.headline}"
+                 onerror="this.parentNode.innerHTML='<div style=&quot;font-size:0.7rem;color:#9aa5bc;text-align:center;padding:0.5rem;&quot;>Missing: ${card.image}</div>'">
+          </div>
+          <div class="card-body">
+            <div class="card-headline">${card.headline}</div>
+            <div class="card-desc">${card.desc}</div>
+            <span class="card-cta">${card.cta}</span>
+          </div>
+        </div>
+      `).join('');
+
+      const dotsHTML = visibleCards.map((_, i) =>
+        `<span class="dot ${i === 0 ? 'active' : ''}"></span>`
+      ).join('');
+
+      previewContent.innerHTML = `
+        <div class="fb-frame">
+          <div class="fb-header">
+            <div class="fb-avatar"></div>
+            <div>
+              <div class="fb-user">Your Restaurant</div>
+              <div class="fb-meta">Sponsored · 🌐</div>
+            </div>
+          </div>
+          <div class="fb-caption">${ad.caption}</div>
+          <div class="carousel-wrap">
+            <div class="carousel" id="carousel">${cardsHTML}</div>
+          </div>
+          <div class="carousel-nav">
+            <div class="carousel-dots" id="dots">${dotsHTML}</div>
+            <div class="nav-arrows">
+              <button class="nav-arrow" id="prevBtn">‹</button>
+              <button class="nav-arrow" id="nextBtn">›</button>
+            </div>
+          </div>
+          <div class="fb-footer">
+            <span>👍 Like</span>
+            <span>💬 Comment</span>
+            <span>↗ Share</span>
+          </div>
+        </div>
+      `;
+
+      // Wire up navigation
+      const carousel = document.getElementById('carousel');
+      const dots = document.querySelectorAll('#dots .dot');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      function updateDots() {
+        const cardWidth = carousel.querySelector('.card').offsetWidth + 10;
+        const idx = Math.round(carousel.scrollLeft / cardWidth);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+
+      function scrollAmount() {
+        const cardWidth = carousel.querySelector('.card').offsetWidth + 10;
+        return cardWidth;
+      }
+
+      prevBtn.addEventListener('click', () => carousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+      nextBtn.addEventListener('click', () => carousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
+      carousel.addEventListener('scroll', updateDots);
+    }
+
+    select.addEventListener('change', function() {
+      if (!this.value) { renderEmpty(); return; }
+      renderAd(this.value);
+    });
+  </script>
+
+</body>
+</html>
