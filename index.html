@@ -43,6 +43,65 @@
       margin: 0 auto;
     }
 
+    /* ===== FLOATING GUIDE BUTTON ===== */
+    .guide-btn-wrap {
+      position: fixed;
+      bottom: 30rem;
+      right: 1.5rem;
+      z-index: 900;
+    }
+
+    .guide-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: #ffffff;
+      color: #0b1424;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      padding: 0.5rem 1.1rem 0.5rem 0.5rem;
+      border-radius: 60px;
+      border: 1px solid #f4f4f7;
+      cursor: pointer;
+      font-family: inherit;
+      box-shadow: 0 10px 30px -8px rgba(11, 20, 36, 0.25);
+      transition: all 0.25s ease;
+    }
+
+    .guide-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -10px rgba(11, 20, 36, 0.35);
+      border-color: #d8e3f5;
+    }
+
+    .guide-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .guide-btn .q-badge {
+      flex: 0 0 auto;
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+      color: #ffffff;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      box-shadow: 0 4px 12px -4px rgba(220, 38, 38, 0.5);
+      animation: pulseRed 2s infinite;
+    }
+
+    @keyframes pulseRed {
+      0%   { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.55); }
+      70%  { box-shadow: 0 0 0 12px rgba(220, 38, 38, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+    }
+
     /* ===== CUSTOM DROPDOWN ===== */
     .selector-wrap {
       margin: 2.5rem auto 2rem auto;
@@ -414,9 +473,186 @@
       padding: 2rem 0;
     }
 
+    /* ===== GUIDE MODAL ===== */
+    .guide-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 20, 36, 0.65);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+    }
+
+    .guide-overlay.active { display: flex; }
+
+    .guide-popup {
+      background: #ffffff;
+      max-width: 560px;
+      width: 100%;
+      border-radius: 1.8rem;
+      box-shadow: 0 32px 64px rgba(0,0,0,0.3);
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: popIn 0.25s ease-out;
+    }
+
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(0.95) translateY(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .guide-header {
+      padding: 1.5rem 2rem 1rem 2rem;
+      background: linear-gradient(135deg, #f7faff 0%, #eef3fc 100%);
+      border-bottom: 1px solid #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .guide-header h2 {
+      font-family: 'Georgia', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #0b1424;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      line-height: 1.2;
+    }
+
+    .guide-close-x {
+      background: #ffffff;
+      border: 1px solid #d8e3f5;
+      color: #1a3b7a;
+      width: 2.2rem;
+      height: 2.2rem;
+      min-width: 2.2rem;
+      border-radius: 50%;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      padding: 0;
+    }
+
+    .guide-close-x:hover {
+      background: #1a3b7a;
+      color: #ffffff;
+      border-color: #1a3b7a;
+    }
+
+    .guide-body {
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .guide-body::-webkit-scrollbar { width: 6px; }
+    .guide-body::-webkit-scrollbar-track { background: #f0f2f5; border-radius: 10px; }
+    .guide-body::-webkit-scrollbar-thumb { background: #b2c7e8; border-radius: 10px; }
+
+    .guide-step {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #f0f2f5;
+    }
+
+    .guide-step:last-child { border-bottom: none; }
+
+    .guide-step .step-num {
+      flex: 0 0 auto;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: #eef3fc;
+      border: 1px solid #d8e3f5;
+      color: #1a3b7a;
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .guide-step .step-content h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0b1424;
+      margin-bottom: 0.3rem;
+    }
+
+    .guide-step .step-content p {
+      font-size: 0.9rem;
+      color: #55617d;
+      line-height: 1.5;
+    }
+
+    .guide-step .step-content code {
+      background: #eef3fc;
+      color: #1a3b7a;
+      padding: 0.1rem 0.5rem;
+      border-radius: 5px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .guide-footer {
+      padding: 1rem 2rem 1.5rem 2rem;
+      border-top: 1px solid #e9ecef;
+      background: #fafbfd;
+      flex-shrink: 0;
+    }
+
+    .guide-close-btn {
+      width: 100%;
+      background: #1a3b7a;
+      color: #fff;
+      border: none;
+      border-radius: 60px;
+      padding: 0.8rem 2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+
+    .guide-close-btn:hover { background: #0b1f4a; }
+
     @media (max-width: 600px) {
       .hero h1 { font-size: 1.8rem; }
       .card { width: 88%; }
+      .guide-btn-wrap {
+        bottom: 1rem;
+        right: 1rem;
+      }
+      .guide-btn {
+        padding: 0.45rem;
+        gap: 0;
+      }
+      .guide-btn > span:last-child {
+        display: none;
+      }
+      .guide-btn .q-badge {
+        width: 2.6rem;
+        height: 2.6rem;
+        font-size: 1.3rem;
+      }
+      .guide-header, .guide-body, .guide-footer { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .guide-header h2 { font-size: 1.15rem; }
     }
   </style>
 </head>
@@ -430,6 +666,7 @@
   </section>
 
   <div class="container">
+
     <div class="selector-wrap">
       <label>Choose an ad objective</label>
       <div class="custom-select" id="customSelect">
@@ -463,6 +700,56 @@
 
   <div class="footer-note">
     © 2026 The Artistic Unity — Restaurant Templates · All rights reserved.
+  </div>
+
+  <!-- ===== FLOATING GUIDE BUTTON ===== -->
+  <div class="guide-btn-wrap">
+    <button type="button" class="guide-btn" id="guideBtn">
+      <span class="q-badge">?</span>
+      <span>How to Use the Pack</span>
+    </button>
+  </div>
+
+  <!-- ===== GUIDE MODAL ===== -->
+  <div class="guide-overlay" id="guideOverlay">
+    <div class="guide-popup">
+      <div class="guide-header">
+        <h2>📖 How to Use the Pack</h2>
+        <button class="guide-close-x" id="guideCloseX" aria-label="Close">✕</button>
+      </div>
+
+      <div class="guide-body">
+
+        <div class="guide-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Start with the Logo Page</h3>
+            <p>Always begin with the <strong>Logo Page</strong>, then move to the images provided in the <strong>Introduction Pack</strong>.</p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Then Use Product Show-Off</h3>
+            <p>After the introduction, use the relevant <strong>Product Show-Off</strong> images to showcase your dishes.</p>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Always End with the Service Button</h3>
+            <p>The <strong>Service button</strong> is always the call-to-action — such as <code>Buy Now</code>, <code>See More</code>, or <code>Learn More</code>.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="guide-footer">
+        <button class="guide-close-btn" id="guideCloseBtn">Got it</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -648,6 +935,36 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         customSelect.classList.remove('open');
+      }
+    });
+
+    // ===== GUIDE MODAL LOGIC =====
+    const guideBtn = document.getElementById('guideBtn');
+    const guideOverlay = document.getElementById('guideOverlay');
+    const guideCloseBtn = document.getElementById('guideCloseBtn');
+    const guideCloseX = document.getElementById('guideCloseX');
+
+    function openGuide() {
+      guideOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeGuide() {
+      guideOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    guideBtn.addEventListener('click', openGuide);
+    guideCloseBtn.addEventListener('click', closeGuide);
+    guideCloseX.addEventListener('click', closeGuide);
+
+    guideOverlay.addEventListener('click', function(e) {
+      if (e.target === guideOverlay) closeGuide();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && guideOverlay.classList.contains('active')) {
+        closeGuide();
       }
     });
   </script>
