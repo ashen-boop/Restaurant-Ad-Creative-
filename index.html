@@ -43,12 +43,15 @@
       margin: 0 auto;
     }
 
-    /* SELECTOR */
+    /* ===== CUSTOM DROPDOWN ===== */
     .selector-wrap {
       margin: 2.5rem auto 2rem auto;
       max-width: 520px;
       text-align: center;
+      position: relative;
+      z-index: 50;
     }
+
     .selector-wrap label {
       display: block;
       font-size: 0.8rem;
@@ -58,9 +61,19 @@
       color: #7a86a0;
       margin-bottom: 0.6rem;
     }
-    select {
+
+    .custom-select {
+      position: relative;
       width: 100%;
-      padding: 0.95rem 1.2rem;
+    }
+
+    .custom-select-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.95rem 1.4rem;
       font-size: 1rem;
       font-family: inherit;
       font-weight: 500;
@@ -69,14 +82,88 @@
       border: 1.5px solid #d8e3f5;
       border-radius: 60px;
       cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231a3b7a' stroke-width='3' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1.3rem center;
       box-shadow: 0 4px 14px -6px rgba(26, 59, 122, 0.2);
-      transition: border-color 0.2s;
+      transition: all 0.2s ease;
+      text-align: left;
     }
-    select:hover, select:focus { border-color: #1a3b7a; outline: none; }
+
+    .custom-select-trigger:hover,
+    .custom-select.open .custom-select-trigger {
+      border-color: #1a3b7a;
+      box-shadow: 0 8px 24px -8px rgba(26, 59, 122, 0.3);
+    }
+
+    .custom-select-trigger .arrow {
+      flex: 0 0 auto;
+      color: #1a3b7a;
+      font-size: 0.8rem;
+      transition: transform 0.25s ease;
+    }
+
+    .custom-select.open .custom-select-trigger .arrow {
+      transform: rotate(180deg);
+    }
+
+    .custom-select-options {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border: 1px solid #e4ebf5;
+      border-radius: 1.2rem;
+      box-shadow: 0 20px 40px -12px rgba(11, 20, 36, 0.25);
+      padding: 0.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: all 0.2s ease;
+      max-height: 320px;
+      overflow-y: auto;
+      z-index: 60;
+    }
+
+    .custom-select.open .custom-select-options {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .custom-option {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.7rem 1rem;
+      border-radius: 0.8rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #2b3550;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: left;
+    }
+
+    .custom-option:hover {
+      background: #f4f8ff;
+      color: #1a3b7a;
+    }
+
+    .custom-option.selected {
+      background: #eef3fc;
+      color: #1a3b7a;
+      font-weight: 600;
+    }
+
+    .custom-option .check {
+      margin-left: auto;
+      color: #1a3b7a;
+      opacity: 0;
+      font-weight: 700;
+    }
+
+    .custom-option.selected .check {
+      opacity: 1;
+    }
 
     /* FACEBOOK AD FRAME */
     .fb-frame {
@@ -123,29 +210,33 @@
       line-height: 1.5;
     }
 
-    /* CAROUSEL AREA */
+    /* ===== CAROUSEL AREA ===== */
     .carousel-wrap {
       position: relative;
       border-top: 1px solid #f0f0f0;
       border-bottom: 1px solid #f0f0f0;
+      overflow: hidden;
     }
     .carousel {
       display: flex;
-      gap: 0.6rem;
+      gap: 0.4rem;
       overflow-x: auto;
       padding: 0.8rem;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
+      scroll-padding-left: 0.8rem;
+      scroll-padding-right: 0.8rem;
     }
     .carousel::-webkit-scrollbar { display: none; }
 
     .card {
       flex: 0 0 auto;
-      width: 200px;
+      width: 85%;
+      max-width: 340px;
       background: #ffffff;
       border: 1px solid #e4ebf5;
-      border-radius: 0.6rem;
+      border-radius: 0.5rem;
       overflow: hidden;
       scroll-snap-align: start;
       display: flex;
@@ -153,7 +244,7 @@
     }
     .card-img {
       width: 100%;
-      height: 200px;
+      aspect-ratio: 1 / 1;
       background: #eef3fc;
       display: flex;
       align-items: center;
@@ -167,14 +258,22 @@
       display: block;
     }
     .card-body {
-      padding: 0.7rem 0.8rem;
+      padding: 0.8rem 0.9rem 0.9rem 0.9rem;
       display: flex;
       flex-direction: column;
       gap: 0.3rem;
       flex: 1;
+      background: #f7f9fc;
+    }
+    .card-domain {
+      font-size: 0.65rem;
+      color: #7a86a0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
     }
     .card-headline {
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: #0b1424;
       line-height: 1.3;
@@ -185,20 +284,20 @@
       line-height: 1.35;
     }
     .card-cta {
-      margin-top: auto;
       align-self: flex-start;
       font-size: 0.72rem;
       font-weight: 700;
-      color: #1a3b7a;
-      background: #eef3fc;
-      border: 1px solid #d8e3f5;
-      padding: 0.35rem 0.8rem;
+      color: #ffffff;
+      background: #1a3b7a;
+      border: 1px solid #1a3b7a;
+      padding: 0.4rem 0.9rem;
       border-radius: 6px;
       text-decoration: none;
       cursor: pointer;
       transition: background 0.15s;
+      margin-top: 0.6rem;
     }
-    .card-cta:hover { background: #d8e3f5; }
+    .card-cta:hover { background: #0b1f4a; }
 
     /* Carousel nav */
     .carousel-nav {
@@ -317,8 +416,7 @@
 
     @media (max-width: 600px) {
       .hero h1 { font-size: 1.8rem; }
-      .card { width: 170px; }
-      .card-img { height: 170px; }
+      .card { width: 88%; }
     }
   </style>
 </head>
@@ -333,16 +431,21 @@
 
   <div class="container">
     <div class="selector-wrap">
-      <label for="ideaSelect">Choose an ad objective</label>
-      <select id="ideaSelect">
-        <option value="">— Select an ad objective —</option>
-        <option value="awareness">Awareness</option>
-        <option value="traffic">Traffic</option>
-        <option value="engagement">Engagement</option>
-        <option value="leads">Leads</option>
-        <option value="app-promotion">App Promotion</option>
-        <option value="sales">Sales</option>
-      </select>
+      <label>Choose an ad objective</label>
+      <div class="custom-select" id="customSelect">
+        <button type="button" class="custom-select-trigger" id="customTrigger">
+          <span id="customLabel">— Select an ad objective —</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="custom-select-options" id="customOptions">
+          <div class="custom-option" data-value="awareness">Awareness <span class="check">✓</span></div>
+          <div class="custom-option" data-value="traffic">Traffic <span class="check">✓</span></div>
+          <div class="custom-option" data-value="engagement">Engagement <span class="check">✓</span></div>
+          <div class="custom-option" data-value="leads">Leads <span class="check">✓</span></div>
+          <div class="custom-option" data-value="app-promotion">App Promotion <span class="check">✓</span></div>
+          <div class="custom-option" data-value="sales">Sales <span class="check">✓</span></div>
+        </div>
+      </div>
     </div>
 
     <div id="previewContent">
@@ -363,44 +466,39 @@
   </div>
 
   <script>
-    // ============================================================
-    //  CAROUSEL DATA — keys match Meta's official ad objectives
-    //  Cards with no image are skipped automatically.
-    // ============================================================
-
     const ads = {
       "awareness": {
         caption: "Fresh ingredients, made with love every single day. Come see what we're about. 🍝",
         cards: [
           { image: "https://i.postimg.cc/GtHQgp9k/Copy-of-The-Artistic-Unity.png", headline: "Welcome", desc: "Fresh, every day", cta: "Learn More" },
           { image: "https://i.postimg.cc/FRPpxSFH/1-(6).png", headline: "Who Are We?", desc: "Where it all happens", cta: "Learn More" },
-           { image: "https://i.postimg.cc/QtNS5m3m/5-(4).png", headline: "Fresh Ingredients", desc: "Where it all happens", cta: "Learn More" },
-          { image: "https://i.postimg.cc/Hk5SCjzy/9-(3).png", headline: "Authenticity ", desc: "Why we cook", cta: "Learn More" }
+          { image: "https://i.postimg.cc/QtNS5m3m/5-(4).png", headline: "Fresh Ingredients", desc: "Where it all happens", cta: "Learn More" },
+          { image: "https://i.postimg.cc/Hk5SCjzy/9-(3).png", headline: "Authenticity", desc: "Why we cook", cta: "Learn More" }
         ]
       },
       "traffic": {
         caption: "Our full menu is live on our website — tap to see everything we serve.",
         cards: [
-          { image: "https://i.postimg.cc/GtHQgp9k/Copy-of-The-Artistic-Unity.png", headline: "Welcome", desc: "Every dish, every price", cta: "Vsit Website" },
-          { image: "https://i.postimg.cc/MTs5YBZx/7-(3).png", headline: "Multiple Options", desc: "Delivery or pickup", cta: "Vsit Website" },
-           { image: "https://i.postimg.cc/8zWyVs4B/11-(2).png", headline: "Desserts!", desc: "Delivery or pickup", cta: "Vsit Website" },
-          { image: "https://i.postimg.cc/LXyDVP9G/6-(6).png", headline: "Visit Our Website", desc: "Location + hours", cta: "Vsit Website" }
+          { image: "https://i.postimg.cc/GtHQgp9k/Copy-of-The-Artistic-Unity.png", headline: "Welcome", desc: "Every dish, every price", cta: "Visit Website" },
+          { image: "https://i.postimg.cc/MTs5YBZx/7-(3).png", headline: "Multiple Options", desc: "Delivery or pickup", cta: "Visit Website" },
+          { image: "https://i.postimg.cc/8zWyVs4B/11-(2).png", headline: "Desserts!", desc: "Delivery or pickup", cta: "Visit Website" },
+          { image: "https://i.postimg.cc/LXyDVP9G/6-(6).png", headline: "Visit Our Website", desc: "Location + hours", cta: "Visit Website" }
         ]
       },
       "engagement": {
         caption: "Which one are you ordering first? Tell us below. 👇",
         cards: [
-           { image: "https://i.postimg.cc/GtHQgp9k/Copy-of-The-Artistic-Unity.png", headline: "Welcome", desc: "Fresh, every day", cta: "View Now" },
+          { image: "https://i.postimg.cc/GtHQgp9k/Copy-of-The-Artistic-Unity.png", headline: "Welcome", desc: "Fresh, every day", cta: "View Now" },
           { image: "https://i.postimg.cc/FRPpxSFH/1-(6).png", headline: "Who Are We?", desc: "Comment your favorite", cta: "View Now" },
           { image: "https://i.postimg.cc/QtNS5m3m/5-(4).png", headline: "Fresh ingredients", desc: "Who would love this?", cta: "View Now" },
-           { image: "https://i.postimg.cc/LXyDVP9G/6-(6).png", headline: "We Are Unique", desc: "Who would love this?", cta: "View Now" }
+          { image: "https://i.postimg.cc/LXyDVP9G/6-(6).png", headline: "We Are Unique", desc: "Who would love this?", cta: "View Now" }
         ]
       },
       "leads": {
         caption: "Want our full menu? We'll send it straight to your WhatsApp. 📩",
         cards: [
           { image: "https://i.postimg.cc/GtHQgp9k/Copy-of-The-Artistic-Unity.png", headline: "Welcome", desc: "Sent instantly", cta: "Send WhatsApp" },
-           { image: "https://i.postimg.cc/FRPpxSFH/1-(6).png", headline: "Who Are We?", desc: "Sent instantly", cta: "Send WhatsApp" },
+          { image: "https://i.postimg.cc/FRPpxSFH/1-(6).png", headline: "Who Are We?", desc: "Sent instantly", cta: "Send WhatsApp" },
           { image: "https://i.postimg.cc/T1FczXWn/3-(8).png", headline: "30% Off", desc: "Offers before anyone else", cta: "Send WhatsApp" },
           { image: "https://i.postimg.cc/bvhmY8Vg/4-(9).png", headline: "Book A Table", desc: "We'll confirm by message", cta: "Send WhatsApp" }
         ]
@@ -409,35 +507,28 @@
         caption: "Order faster with our app — download now and get your first dessert free.",
         cards: [
           { image: "https://i.postimg.cc/GtHQgp9k/Copy-of-The-Artistic-Unity.png", headline: "Welcome", desc: "Order in seconds", cta: "Install Now" },
-           { image: "https://i.postimg.cc/FRPpxSFH/1-(6).png", headline: "Who Are We?", desc: "All signature dishes", cta: "Install Now" },
+          { image: "https://i.postimg.cc/FRPpxSFH/1-(6).png", headline: "Who Are We?", desc: "All signature dishes", cta: "Install Now" },
           { image: "https://i.postimg.cc/4xt8TnPw/8-(4).png", headline: "Multiple Options", desc: "First app order", cta: "Install Now" },
-           { image: "https://i.postimg.cc/8zWyVs4B/11-(2).png", headline: "Desserts!", desc: "First app order", cta: "Install Now" },
+          { image: "https://i.postimg.cc/8zWyVs4B/11-(2).png", headline: "Desserts!", desc: "First app order", cta: "Install Now" },
           { image: "https://i.postimg.cc/Hk5SCjzy/9-(3).png", headline: "One Click Away", desc: "Order Online", cta: "Install Now" }
         ]
       },
       "sales": {
-        caption: "This weekend only — 20% off our signature dishes. Book your table now.",
+        caption: "This weekend only — 30% off our signature dishes. Book your table now.",
         cards: [
           { image: "https://i.postimg.cc/GtHQgp9k/Copy-of-The-Artistic-Unity.png", headline: "Welcome", desc: "All signature dishes", cta: "Order Now" },
           { image: "https://i.postimg.cc/FRPpxSFH/1-(6).png", headline: "Who Are We?", desc: "All signature dishes", cta: "Order Now" },
           { image: "https://i.postimg.cc/MTs5YBZx/7-(3).png", headline: "Multiple Options", desc: "Limited tables available", cta: "Order Now" },
           { image: "https://i.postimg.cc/ZY7s8G0C/12-(2).png", headline: "Desserts!", desc: "2-for-1 on mains", cta: "Order Now" },
-           { image: "https://i.postimg.cc/T1FczXWn/3-(8).png", headline: "30% OFF", desc: "2-for-1 on mains", cta: "Order Now" }
+          { image: "https://i.postimg.cc/T1FczXWn/3-(8).png", headline: "30% OFF", desc: "2-for-1 on mains", cta: "Order Now" }
         ]
       }
     };
 
-    // ============================================================
-    //  RENDER LOGIC
-    // ============================================================
-
-    const select = document.getElementById('ideaSelect');
     const previewContent = document.getElementById('previewContent');
 
     function renderEmpty() {
-      previewContent.innerHTML = `
-        <div class="empty-state">↑ Select an ad objective to see it live</div>
-      `;
+      previewContent.innerHTML = `<div class="empty-state">↑ Select an ad objective to see it live</div>`;
     }
 
     function renderAd(key) {
@@ -457,6 +548,7 @@
                  onerror="this.parentNode.innerHTML='<div style=&quot;font-size:0.7rem;color:#9aa5bc;text-align:center;padding:0.5rem;&quot;>Missing: ${card.image}</div>'">
           </div>
           <div class="card-body">
+            <div class="card-domain">yourrestaurant.com</div>
             <div class="card-headline">${card.headline}</div>
             <div class="card-desc">${card.desc}</div>
             <span class="card-cta">${card.cta}</span>
@@ -501,11 +593,13 @@
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
 
-      function cardWidth() {
-        return carousel.querySelector('.card').offsetWidth + 10;
+      function stepWidth() {
+        const card = carousel.querySelector('.card');
+        const gap = 6.4;
+        return card.offsetWidth + gap;
       }
       function updateDots() {
-        const idx = Math.round(carousel.scrollLeft / cardWidth());
+        const idx = Math.round(carousel.scrollLeft / stepWidth());
         dots.forEach((d, i) => d.classList.toggle('active', i === idx));
       }
       function updateArrows() {
@@ -513,15 +607,48 @@
         nextBtn.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 2;
       }
 
-      prevBtn.addEventListener('click', () => carousel.scrollBy({ left: -cardWidth(), behavior: 'smooth' }));
-      nextBtn.addEventListener('click', () => carousel.scrollBy({ left: cardWidth(), behavior: 'smooth' }));
+      prevBtn.addEventListener('click', () => carousel.scrollBy({ left: -stepWidth(), behavior: 'smooth' }));
+      nextBtn.addEventListener('click', () => carousel.scrollBy({ left: stepWidth(), behavior: 'smooth' }));
       carousel.addEventListener('scroll', () => { updateDots(); updateArrows(); });
       updateArrows();
     }
 
-    select.addEventListener('change', function() {
-      if (!this.value) { renderEmpty(); return; }
-      renderAd(this.value);
+    // ===== CUSTOM DROPDOWN LOGIC =====
+    const customSelect = document.getElementById('customSelect');
+    const customTrigger = document.getElementById('customTrigger');
+    const customLabel = document.getElementById('customLabel');
+    const customOptions = document.querySelectorAll('.custom-option');
+
+    customTrigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      customSelect.classList.toggle('open');
+    });
+
+    customOptions.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        const value = this.getAttribute('data-value');
+        const text = this.textContent.replace('✓', '').trim();
+
+        customLabel.textContent = text;
+        customSelect.classList.remove('open');
+
+        customOptions.forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+
+        renderAd(value);
+      });
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!customSelect.contains(e.target)) {
+        customSelect.classList.remove('open');
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        customSelect.classList.remove('open');
+      }
     });
   </script>
 
